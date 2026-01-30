@@ -6,7 +6,9 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         int lastId = 0;
-        WiseSaying wiseSaying = new WiseSaying();
+
+        WiseSaying[] wiseSayings = new WiseSaying[10];
+        int lastWiseSayingIndex = -1;
 
         System.out.println("== 명언 앱 ==");
 
@@ -24,16 +26,22 @@ public class Main {
                 System.out.print("작가 : ");
                 String author = sc.nextLine();
 
+                WiseSaying wiseSaying = new WiseSaying();
+
                 wiseSaying.id = ++lastId;
                 wiseSaying.content = content;
                 wiseSaying.author = author;
 
+                wiseSayings[++lastWiseSayingIndex] = wiseSaying;
                 System.out.println(lastId + "번 명언이 등록되었습니다.");
 
             } else if (cmd.equals("목록")) {
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("----------------------");
-                System.out.println(wiseSaying.id + " / " + wiseSaying.author + " / " + wiseSaying.content);
+                for (int i = 0; i <= lastWiseSayingIndex; i++) {
+                    WiseSaying foundedWiseSaying = wiseSayings[i];
+                    System.out.println(foundedWiseSaying.id + " / " + foundedWiseSaying.author + " / " + foundedWiseSaying.content);
+                }
             }
         }
     }
