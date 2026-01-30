@@ -38,7 +38,7 @@ public class Main {
             } else if (cmd.equals("목록")) {
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("----------------------");
-                for (int i = 0; i <= lastWiseSayingIndex; i++) {
+                for (int i = lastWiseSayingIndex; i >= 0; i--) {
                     WiseSaying foundedWiseSaying = wiseSayings[i];
                     System.out.println(foundedWiseSaying.id + " / " + foundedWiseSaying.author + " / " + foundedWiseSaying.content);
                 }
