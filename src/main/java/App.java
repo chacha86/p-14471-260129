@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -31,23 +29,24 @@ public class App {
     private void actionList() {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
-        List<WiseSaying> wiseSayingList = findList();
+        WiseSaying[] foundedWiseSayings = findList();
 
-        for(WiseSaying wiseSaying : wiseSayingList) {
+        for(WiseSaying wiseSaying : foundedWiseSayings) {
             System.out.printf("%d / %s / %s\n", wiseSaying.id, wiseSaying.author, wiseSaying.content);
         }
     }
 
-    private List<WiseSaying> findList() {
+    private WiseSaying[] findList() {
 
-        List<WiseSaying> wiseSayingList = new ArrayList<>();
+        WiseSaying[] foundedWiseSayings = new WiseSaying[lastWiseSayingIndex + 1];
+        int foundedWiseSayingIndex = -1;
 
         for (int i = lastWiseSayingIndex; i >= 0; i--) {
             WiseSaying foundedWiseSaying = wiseSayings[i];
-            wiseSayingList.add(foundedWiseSaying);
+            foundedWiseSayings[++foundedWiseSayingIndex] = foundedWiseSaying;
         }
 
-        return wiseSayingList;
+        return foundedWiseSayings;
     }
 
     private void actionWrite() {
