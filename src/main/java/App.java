@@ -24,8 +24,47 @@ public class App {
                 actionList();
             } else if (cmd.startsWith("삭제")) {
                 actionDelete(cmd);
+            } else if (cmd.startsWith("수정")) {
+                actionModify(cmd);
             }
         }
+    }
+
+    private void actionModify(String cmd) {
+
+        String idStr = cmd.split("=")[1];
+        int id = Integer.parseInt(idStr);
+        WiseSaying wiseSaying = findById(id);
+
+        if(wiseSaying == null) {
+            System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
+            return;
+        }
+
+        System.out.print("명언(기존) : %s\n".formatted(wiseSaying.content));
+        System.out.print("명언 : ");
+        String content = sc.nextLine();
+        System.out.print("작가(기존) : %s\n".formatted(wiseSaying.author));
+        System.out.print("작가 : ");
+        String author = sc.nextLine();
+
+        modify(wiseSaying, content, author);
+    }
+
+    private void modify(WiseSaying wiseSaying, String content, String author) {
+        wiseSaying.author = author;
+        wiseSaying.content = content;
+    }
+
+    private WiseSaying findById(int modifyTarget) {
+
+        for (int i = 0; i <= lastWiseSayingIndex; i++) {
+            WiseSaying foundedWiseSaying = wiseSayings[i];
+            if (modifyTarget == foundedWiseSaying.id) {
+                return wiseSayings[i];
+            }
+        }
+        return null;
     }
 
     private void actionDelete(String cmd) {
@@ -35,7 +74,7 @@ public class App {
 
         boolean rst = delete(id);
 
-        if(!rst) {
+        if (!rst) {
             System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
             return;
         }
@@ -54,7 +93,7 @@ public class App {
             }
         }
 
-        if(foundIndex == -1) return false;
+        if (foundIndex == -1) return false;
 
         for (int i = foundIndex; i < lastWiseSayingIndex; i++) {
             wiseSayings[i] = wiseSayings[i + 1];
