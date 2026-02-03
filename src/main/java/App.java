@@ -22,20 +22,23 @@ public class App {
                 actionWrite();
             } else if (cmd.equals("목록")) {
                 actionList();
-            } else if (cmd.equals("삭제?id=1")) {
-                actionDelete();
+            } else if (cmd.startsWith("삭제")) {
+                actionDelete(cmd);
             }
         }
     }
 
-    private void actionDelete() {
-        delete();
-        System.out.println("1번 명언이 삭제되었습니다.");
+    private void actionDelete(String cmd) {
+
+        String idStr = cmd.split("=")[1];
+        int id = Integer.parseInt(idStr);
+
+        delete(id);
+        System.out.println("%d번 명언이 삭제되었습니다.".formatted(id));
     }
 
-    private void delete() {
+    private void delete(int deleteTarget) {
 
-        int deleteTarget = 1;
         int foundIndex = -1;
 
         for (int i = 0; i <= lastWiseSayingIndex; i++) {
