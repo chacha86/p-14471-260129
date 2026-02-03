@@ -41,6 +41,11 @@ public class App {
         System.out.print("작가 : ");
         String author = sc.nextLine();
 
+        write(content, author);
+        System.out.println(lastId + "번 명언이 등록되었습니다.");
+    }
+
+    private void write(String content, String author) {
         WiseSaying wiseSaying = new WiseSaying();
 
         wiseSaying.id = ++lastId;
@@ -48,6 +53,5 @@ public class App {
         wiseSaying.author = author;
 
         wiseSayings[++lastWiseSayingIndex] = wiseSaying;
-        System.out.println(lastId + "번 명언이 등록되었습니다.");
     }
 }
