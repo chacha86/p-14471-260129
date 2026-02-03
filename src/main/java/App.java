@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class App {
 
@@ -69,14 +70,19 @@ public class App {
     }
 
     private int findIndexById(int id) {
-        for (int i = 0; i < wiseSayings.size(); i++) {
-            WiseSaying foundedWiseSaying = wiseSayings.get(i);
-            if (id == foundedWiseSaying.getId()) {
-                return i;
-            }
-        }
+//
+//        for (int i = 0; i < wiseSayings.size(); i++) {
+//            WiseSaying foundedWiseSaying = wiseSayings.get(i);
+//            if (id == foundedWiseSaying.getId()) {
+//                return i;
+//            }
+//        }
 
-        return -1;
+        return IntStream
+                .range(0, wiseSayings.size())
+                .filter((i) -> wiseSayings.get(i).getId() == id )
+                .findFirst()
+                .orElse(-1);
     }
 
     private void actionDelete(String cmd) {
