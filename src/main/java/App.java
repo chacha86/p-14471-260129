@@ -2,11 +2,11 @@ import java.util.Scanner;
 
 public class App {
 
-    Scanner sc = new Scanner(System.in);
-    int lastId = 0;
+    private Scanner sc = new Scanner(System.in);
+    private int lastId = 0;
 
-    WiseSaying[] wiseSayings = new WiseSaying[10];
-    int lastWiseSayingIndex = -1;
+    private WiseSaying[] wiseSayings = new WiseSaying[10];
+    private int lastWiseSayingIndex = -1;
 
     public void run() {
 
