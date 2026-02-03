@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -5,8 +7,7 @@ public class App {
     private Scanner sc = new Scanner(System.in);
     private int lastId = 0;
 
-    private WiseSaying[] wiseSayings = new WiseSaying[10];
-    private int lastWiseSayingIndex = -1;
+    private List<WiseSaying> wiseSayings = new ArrayList<>();
 
     public void run() {
 
@@ -64,12 +65,12 @@ public class App {
             return null;
         }
 
-        return wiseSayings[foundedIndex];
+        return wiseSayings.get(foundedIndex);
     }
 
     private int findIndexById(int id) {
-        for (int i = 0; i <= lastWiseSayingIndex; i++) {
-            WiseSaying foundedWiseSaying = wiseSayings[i];
+        for (int i = 0; i < wiseSayings.size(); i++) {
+            WiseSaying foundedWiseSaying = wiseSayings.get(i);
             if (id == foundedWiseSaying.getId()) {
                 return i;
             }
@@ -99,32 +100,27 @@ public class App {
 
         if (foundIndex == -1) return false;
 
-        for (int i = foundIndex; i < lastWiseSayingIndex; i++) {
-            wiseSayings[i] = wiseSayings[i + 1];
-        }
+        wiseSayings.remove(foundIndex);
 
-        lastWiseSayingIndex--;
         return true;
     }
 
     private void actionList() {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
-        WiseSaying[] foundedWiseSayings = findList();
+        List<WiseSaying> foundedWiseSayings = findList();
 
         for (WiseSaying wiseSaying : foundedWiseSayings) {
             System.out.printf("%d / %s / %s\n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent());
         }
     }
 
-    private WiseSaying[] findList() {
+    private List<WiseSaying> findList() {
 
-        WiseSaying[] foundedWiseSayings = new WiseSaying[lastWiseSayingIndex + 1];
-        int foundedWiseSayingIndex = -1;
+        List<WiseSaying> foundedWiseSayings = new ArrayList<>();
 
-        for (int i = lastWiseSayingIndex; i >= 0; i--) {
-            WiseSaying foundedWiseSaying = wiseSayings[i];
-            foundedWiseSayings[++foundedWiseSayingIndex] = foundedWiseSaying;
+        for(WiseSaying wiseSaying : wiseSayings.reversed()) {
+            foundedWiseSayings.add(wiseSaying);
         }
 
         return foundedWiseSayings;
@@ -142,6 +138,6 @@ public class App {
 
     private void write(String content, String author) {
         WiseSaying wiseSaying = new WiseSaying(++lastId, content, author);
-        wiseSayings[++lastWiseSayingIndex] = wiseSaying;
+        wiseSayings.add(wiseSaying);
     }
 }
