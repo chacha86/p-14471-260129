@@ -22,7 +22,7 @@ public class App {
                 actionWrite();
             } else if (cmd.equals("목록")) {
                 actionList();
-            } else if(cmd.equals("삭제?id=1")) {
+            } else if (cmd.equals("삭제?id=1")) {
                 actionDelete();
             }
         }
@@ -35,9 +35,19 @@ public class App {
 
     private void delete() {
 
-        int deleteTarget = 0;
+        int deleteTarget = 1;
+        int foundIndex = -1;
 
-        for(int i = deleteTarget; i < lastWiseSayingIndex; i++) {
+        for (int i = 0; i <= lastWiseSayingIndex; i++) {
+            WiseSaying foundedWiseSaying = wiseSayings[i];
+            if (deleteTarget == foundedWiseSaying.id) {
+                foundIndex = i;
+            }
+        }
+
+        if(foundIndex == -1) return;
+
+        for (int i = foundIndex; i < lastWiseSayingIndex; i++) {
             wiseSayings[i] = wiseSayings[i + 1];
         }
 
@@ -49,7 +59,7 @@ public class App {
         System.out.println("----------------------");
         WiseSaying[] foundedWiseSayings = findList();
 
-        for(WiseSaying wiseSaying : foundedWiseSayings) {
+        for (WiseSaying wiseSaying : foundedWiseSayings) {
             System.out.printf("%d / %s / %s\n", wiseSaying.id, wiseSaying.author, wiseSaying.content);
         }
     }
