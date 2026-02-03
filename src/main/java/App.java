@@ -56,15 +56,26 @@ public class App {
         wiseSaying.content = content;
     }
 
-    private WiseSaying findById(int modifyTarget) {
+    private WiseSaying findById(int id) {
 
+        int foundedIndex = findIndexById(id);
+
+        if (foundedIndex == -1) {
+            return null;
+        }
+
+        return wiseSayings[foundedIndex];
+    }
+
+    private int findIndexById(int id) {
         for (int i = 0; i <= lastWiseSayingIndex; i++) {
             WiseSaying foundedWiseSaying = wiseSayings[i];
-            if (modifyTarget == foundedWiseSaying.id) {
-                return wiseSayings[i];
+            if (id == foundedWiseSaying.id) {
+                return i;
             }
         }
-        return null;
+
+        return -1;
     }
 
     private void actionDelete(String cmd) {
@@ -84,14 +95,7 @@ public class App {
 
     private boolean delete(int deleteTarget) {
 
-        int foundIndex = -1;
-
-        for (int i = 0; i <= lastWiseSayingIndex; i++) {
-            WiseSaying foundedWiseSaying = wiseSayings[i];
-            if (deleteTarget == foundedWiseSaying.id) {
-                foundIndex = i;
-            }
-        }
+        int foundIndex = findIndexById(deleteTarget);
 
         if (foundIndex == -1) return false;
 
