@@ -38,7 +38,7 @@ public class App {
         int id = Integer.parseInt(idStr);
         WiseSaying wiseSaying = findById(id);
 
-        if(wiseSaying == null) {
+        if (wiseSaying == null) {
             System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
             return;
         }
@@ -70,17 +70,9 @@ public class App {
     }
 
     private int findIndexById(int id) {
-//
-//        for (int i = 0; i < wiseSayings.size(); i++) {
-//            WiseSaying foundedWiseSaying = wiseSayings.get(i);
-//            if (id == foundedWiseSaying.getId()) {
-//                return i;
-//            }
-//        }
-
         return IntStream
                 .range(0, wiseSayings.size())
-                .filter((i) -> wiseSayings.get(i).getId() == id )
+                .filter((i) -> wiseSayings.get(i).getId() == id)
                 .findFirst()
                 .orElse(-1);
     }
@@ -101,14 +93,7 @@ public class App {
     }
 
     private boolean delete(int deleteTarget) {
-
-        int foundIndex = findIndexById(deleteTarget);
-
-        if (foundIndex == -1) return false;
-
-        wiseSayings.remove(foundIndex);
-
-        return true;
+        return wiseSayings.removeIf((wiseSaying) -> wiseSaying.getId() == deleteTarget);
     }
 
     private void actionList() {
@@ -125,7 +110,7 @@ public class App {
 
         List<WiseSaying> foundedWiseSayings = new ArrayList<>();
 
-        for(WiseSaying wiseSaying : wiseSayings.reversed()) {
+        for (WiseSaying wiseSaying : wiseSayings.reversed()) {
             foundedWiseSayings.add(wiseSaying);
         }
 
