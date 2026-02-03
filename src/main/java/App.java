@@ -33,11 +33,17 @@ public class App {
         String idStr = cmd.split("=")[1];
         int id = Integer.parseInt(idStr);
 
-        delete(id);
+        boolean rst = delete(id);
+
+        if(!rst) {
+            System.out.println("%d번 명언은 존재하지 않습니다.".formatted(id));
+            return;
+        }
+
         System.out.println("%d번 명언이 삭제되었습니다.".formatted(id));
     }
 
-    private void delete(int deleteTarget) {
+    private boolean delete(int deleteTarget) {
 
         int foundIndex = -1;
 
@@ -48,13 +54,14 @@ public class App {
             }
         }
 
-        if(foundIndex == -1) return;
+        if(foundIndex == -1) return false;
 
         for (int i = foundIndex; i < lastWiseSayingIndex; i++) {
             wiseSayings[i] = wiseSayings[i + 1];
         }
 
         lastWiseSayingIndex--;
+        return true;
     }
 
     private void actionList() {
