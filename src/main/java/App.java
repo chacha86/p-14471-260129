@@ -141,12 +141,7 @@ public class App {
     }
 
     private void write(String content, String author) {
-        WiseSaying wiseSaying = new WiseSaying();
-
-        wiseSaying.setId(++lastId);
-        wiseSaying.setContent(content);
-        wiseSaying.setAuthor(author);
-
+        WiseSaying wiseSaying = new WiseSaying(++lastId, content, author);
         wiseSayings[++lastWiseSayingIndex] = wiseSaying;
     }
 }
