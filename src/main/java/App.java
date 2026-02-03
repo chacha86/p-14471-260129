@@ -22,8 +22,26 @@ public class App {
                 actionWrite();
             } else if (cmd.equals("목록")) {
                 actionList();
+            } else if(cmd.equals("삭제?id=1")) {
+                actionDelete();
             }
         }
+    }
+
+    private void actionDelete() {
+        delete();
+        System.out.println("1번 명언이 삭제되었습니다.");
+    }
+
+    private void delete() {
+
+        int deleteTarget = 0;
+
+        for(int i = deleteTarget; i < lastWiseSayingIndex; i++) {
+            wiseSayings[i] = wiseSayings[i + 1];
+        }
+
+        lastWiseSayingIndex--;
     }
 
     private void actionList() {
