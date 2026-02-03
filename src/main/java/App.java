@@ -41,10 +41,10 @@ public class App {
             return;
         }
 
-        System.out.print("명언(기존) : %s\n".formatted(wiseSaying.content));
+        System.out.print("명언(기존) : %s\n".formatted(wiseSaying.getContent()));
         System.out.print("명언 : ");
         String content = sc.nextLine();
-        System.out.print("작가(기존) : %s\n".formatted(wiseSaying.author));
+        System.out.print("작가(기존) : %s\n".formatted(wiseSaying.getAuthor()));
         System.out.print("작가 : ");
         String author = sc.nextLine();
 
@@ -52,8 +52,8 @@ public class App {
     }
 
     private void modify(WiseSaying wiseSaying, String content, String author) {
-        wiseSaying.author = author;
-        wiseSaying.content = content;
+        wiseSaying.setContent(content);
+        wiseSaying.setAuthor(author);
     }
 
     private WiseSaying findById(int id) {
@@ -70,7 +70,7 @@ public class App {
     private int findIndexById(int id) {
         for (int i = 0; i <= lastWiseSayingIndex; i++) {
             WiseSaying foundedWiseSaying = wiseSayings[i];
-            if (id == foundedWiseSaying.id) {
+            if (id == foundedWiseSaying.getId()) {
                 return i;
             }
         }
@@ -113,7 +113,7 @@ public class App {
         WiseSaying[] foundedWiseSayings = findList();
 
         for (WiseSaying wiseSaying : foundedWiseSayings) {
-            System.out.printf("%d / %s / %s\n", wiseSaying.id, wiseSaying.author, wiseSaying.content);
+            System.out.printf("%d / %s / %s\n", wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent());
         }
     }
 
@@ -143,9 +143,9 @@ public class App {
     private void write(String content, String author) {
         WiseSaying wiseSaying = new WiseSaying();
 
-        wiseSaying.id = ++lastId;
-        wiseSaying.content = content;
-        wiseSaying.author = author;
+        wiseSaying.setId(++lastId);
+        wiseSaying.setContent(content);
+        wiseSaying.setAuthor(author);
 
         wiseSayings[++lastWiseSayingIndex] = wiseSaying;
     }
