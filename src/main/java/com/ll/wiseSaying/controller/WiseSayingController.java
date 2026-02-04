@@ -1,46 +1,20 @@
-package com.ll.wiseSaying;
+package com.ll.wiseSaying.controller;
+
+import com.ll.Rq;
+import com.ll.wiseSaying.entity.WiseSaying;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-public class App {
+public class WiseSayingController {
 
     private Scanner sc = new Scanner(System.in);
+    private List<WiseSaying> wiseSayings = new ArrayList<>();
     private int lastId = 0;
 
-    private List<WiseSaying> wiseSayings = new ArrayList<>();
-    private SystemController systemController = new SystemController();
-
-    public void run() {
-
-        System.out.println("== 명언 앱 ==");
-
-        while (true) {
-            System.out.print("명령) ");
-            String cmd = sc.nextLine();
-
-            Rq rq = new Rq(cmd); // cmd 분석 객체
-            String action = rq.getAction();
-
-            if (action.equals("종료")) {
-                systemController.exit();
-                break;
-            } else if (action.equals("등록")) {
-                actionWrite();
-            } else if (action.equals("목록")) {
-                actionList();
-            } else if (action.startsWith("삭제")) {
-                actionDelete(rq);
-            } else if (action.startsWith("수정")) {
-                actionModify(rq);
-            }
-        }
-
-    }
-
-    private void actionModify(Rq rq) {
+    public void actionModify(Rq rq) {
         int id = rq.getParamAsInt("id", -1);
 
         if(id == -1) {
@@ -89,7 +63,7 @@ public class App {
                 .orElse(-1);
     }
 
-    private void actionDelete(Rq rq) {
+    public void actionDelete(Rq rq) {
 
         int id = rq.getParamAsInt("id", -1);
 
@@ -112,7 +86,7 @@ public class App {
         return wiseSayings.removeIf((wiseSaying) -> wiseSaying.getId() == deleteTarget);
     }
 
-    private void actionList() {
+    public void actionList() {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
         List<WiseSaying> foundedWiseSayings = findList();
@@ -133,7 +107,7 @@ public class App {
         return foundedWiseSayings;
     }
 
-    private void actionWrite() {
+    public void actionWrite() {
         System.out.print("명언 : ");
         String content = sc.nextLine();
         System.out.print("작가 : ");
