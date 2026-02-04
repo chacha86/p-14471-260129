@@ -28,17 +28,15 @@ public class App {
             } else if (action.equals("목록")) {
                 actionList();
             } else if (action.startsWith("삭제")) {
-                actionDelete(cmd);
+                actionDelete(rq);
             } else if (action.startsWith("수정")) {
-                actionModify(cmd);
+                actionModify(rq);
             }
         }
     }
 
-    private void actionModify(String cmd) {
-
-        String idStr = cmd.split("=")[1];
-        int id = Integer.parseInt(idStr);
+    private void actionModify(Rq rq) {
+        int id = rq.getParamAsInt("id");
         WiseSaying wiseSaying = findById(id);
 
         if (wiseSaying == null) {
@@ -80,11 +78,9 @@ public class App {
                 .orElse(-1);
     }
 
-    private void actionDelete(String cmd) {
+    private void actionDelete(Rq rq) {
 
-        String idStr = cmd.split("=")[1];
-        int id = Integer.parseInt(idStr);
-
+        int id = rq.getParamAsInt("id");
         boolean rst = delete(id);
 
         if (!rst) {
