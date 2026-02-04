@@ -1,3 +1,5 @@
+package com.ll.wiseSaying;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,6 +11,7 @@ public class App {
     private int lastId = 0;
 
     private List<WiseSaying> wiseSayings = new ArrayList<>();
+    private SystemController systemController = new SystemController();
 
     public void run() {
 
@@ -22,6 +25,7 @@ public class App {
             String action = rq.getAction();
 
             if (action.equals("종료")) {
+                systemController.exit();
                 break;
             } else if (action.equals("등록")) {
                 actionWrite();
@@ -33,6 +37,7 @@ public class App {
                 actionModify(rq);
             }
         }
+
     }
 
     private void actionModify(Rq rq) {
