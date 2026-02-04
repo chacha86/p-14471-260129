@@ -18,15 +18,18 @@ public class App {
             System.out.print("명령) ");
             String cmd = sc.nextLine();
 
-            if (cmd.equals("종료")) {
+            Rq rq = new Rq(cmd); // cmd 분석 객체
+            String action = rq.getAction();
+
+            if (action.equals("종료")) {
                 break;
-            } else if (cmd.equals("등록")) {
+            } else if (action.equals("등록")) {
                 actionWrite();
-            } else if (cmd.equals("목록")) {
+            } else if (action.equals("목록")) {
                 actionList();
-            } else if (cmd.startsWith("삭제")) {
+            } else if (action.startsWith("삭제")) {
                 actionDelete(cmd);
-            } else if (cmd.startsWith("수정")) {
+            } else if (action.startsWith("수정")) {
                 actionModify(cmd);
             }
         }
